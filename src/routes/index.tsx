@@ -30,7 +30,6 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
-        loader: loginLoader, // Redirect if already logged in
       },
       {
         path: 'login',

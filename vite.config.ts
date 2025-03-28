@@ -15,5 +15,5 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
   },
-  base: '/',
+  base: '/onlineExamPortal/',
 })
