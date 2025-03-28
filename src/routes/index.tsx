@@ -1,6 +1,8 @@
 import { Navigate, Outlet, createBrowserRouter } from 'react-router-dom'
 
 import { LoginPage } from '@/pages/login'
+import { SignupPage } from '@/pages/signup' // Import SignupPage
+import HomePage from '@/pages/home' // Import HomePage
 import { Dashboard, Exams, Profile } from '@/pages/dashboard'
 import { ExamInstruction, Question, Result } from '@/pages/exam'
 
@@ -9,6 +11,7 @@ import {
   loginLoader,
   logoutAction,
   protectedLoader,
+  signupAction, // Import signupAction
 } from '@/libs/auth'
 import {
   examAction,
@@ -26,13 +29,21 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/login" replace />,
+        element: <HomePage />,
+        loader: loginLoader, // Redirect if already logged in
       },
       {
         path: 'login',
         element: <LoginPage />,
         loader: loginLoader,
         action: loginAction,
+      },
+      { // Add Signup Route
+        path: 'signup',
+        element: <SignupPage />,
+        action: signupAction, // Assign the action
+        // Add a loader similar to loginLoader if needed to redirect authenticated users
+        loader: loginLoader, // Redirect if already logged in
       },
     ],
   },

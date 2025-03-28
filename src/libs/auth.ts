@@ -24,10 +24,47 @@ export const loginAction = async ({ request }: LoaderFunctionArgs) => {
     }
 
     return {
-      error: 'Something went wrong!',
+      error: 'Something went wrong during login!',
     }
   }
 
+  return redirect('/dashboard')
+}
+
+export const signupAction = async ({ request }: LoaderFunctionArgs) => {
+  const formData = await request.formData()
+  const username = formData.get('username') as string | null
+  const password = formData.get('password') as string | null
+  const confirmPassword = formData.get('confirmPassword') as string | null
+
+  // Basic validation
+  if (!username || !password || !confirmPassword) {
+    return {
+      error: 'All fields are required!',
+    }
+  }
+
+  if (password !== confirmPassword) {
+    return {
+      error: 'Passwords do not match!',
+    }
+  }
+
+  // Attempt signup
+  try {
+    await authProvider.signup(username, password)
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        error: error.message, // e.g., "Username already exists!"
+      }
+    }
+    return {
+      error: 'Something went wrong during signup!',
+    }
+  }
+
+  // Redirect to dashboard on successful signup
   return redirect('/dashboard')
 }
 
