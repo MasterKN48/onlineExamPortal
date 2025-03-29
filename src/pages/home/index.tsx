@@ -24,7 +24,7 @@ const HomePage = () => {
                     </Link>
                 </div>
                 <p className="text-sm text-gray-500">
-                    Developed by Rajesh Siti & Saurab Kuta
+                    Developed by Roshan
                 </p>
             </Container>
         </div>
