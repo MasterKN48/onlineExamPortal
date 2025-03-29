@@ -113,4 +113,6 @@ export const router = createBrowserRouter([
     path: 'logout',
     action: logoutAction,
   },
-])
+], {
+  basename: '/onlineExamPortal',
+})

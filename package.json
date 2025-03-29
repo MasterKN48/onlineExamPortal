@@ -14,7 +14,7 @@
     "predeploy": "pnpm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://masterkn48.github.io/onlineExamPortal",
+  "homepage": "https://masterkn48.github.io/onlineExamPortal/",
   "dependencies": {
     "@fontsource/plus-jakarta-sans": "^5.0.17",
     "clsx": "^2.0.0",
