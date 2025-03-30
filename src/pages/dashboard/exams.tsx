@@ -1,8 +1,7 @@
-import { Timer } from 'lucide-react'
-import { Link, useRouteLoaderData } from 'react-router-dom'
-
-import { Exam } from '@/_data/exams'
-import { Heading } from '@/components/ui'
+import { Timer } from 'lucide-react';
+import { Link, useRouteLoaderData } from 'react-router-dom';
+import { Heading } from '@/components/ui';
+import { Exam } from '@/_data/exams';
 
 export const Exams = () => {
   const { exams } = useRouteLoaderData('exams') as {

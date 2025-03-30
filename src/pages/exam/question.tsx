@@ -61,11 +61,11 @@ export const Question = () => {
   };
 
   // Handle finish when timer is 0
-  useEffect(() => {
-    if (timer <= 0) {
-      handleFinish();
-    }
-  }, [timer, handleFinish]);
+  // useEffect(() => {
+  //   if (timer <= 0) {
+  //     handleFinish();
+  //   }
+  // }, [timer, handleFinish]);
 
   // Update timer every second
   useEffect(() => {
@@ -90,12 +90,29 @@ export const Question = () => {
     setSelectedAnswer(event.target.value);
   };
 
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (timer > 0) {
+        event.preventDefault();
+        setShowModal(true);
+        event.returnValue = ''; // Required for some browsers
+        return ''; // Required for some browsers
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [timer, handleFinish]);
+
   return (
     // Apply background gradient to the outer div
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 p-4 sm:p-8">
       {/* Apply card styling to the Container */}
       <Container className="flex flex-col bg-white rounded-lg shadow-xl w-full max-w-3xl p-8">
-        <Header title={`Question ${question.id}`} /> {/* Use Header component */}
+        <Header title={`Question ${question.id}`} handleFinish={handleFinish} /> {/* Use Header component */}
 
         {showModal && (
           <FinishModal

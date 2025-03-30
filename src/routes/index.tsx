@@ -1,10 +1,12 @@
-import { Navigate, Outlet, createBrowserRouter } from 'react-router-dom'
+import { Navigate, Outlet, createBrowserRouter } from 'react-router-dom';
 
-import { LoginPage } from '@/pages/login'
-import { SignupPage } from '@/pages/signup' // Import SignupPage
-import HomePage from '@/pages/home' // Import HomePage
-import { Dashboard, Exams, Profile } from '@/pages/dashboard'
-import { ExamInstruction, Question, Result } from '@/pages/exam'
+import { LoginPage } from '@/pages/login';
+import { SignupPage } from '@/pages/signup'; // Import SignupPage
+import HomePage from '@/pages/home'; // Import HomePage
+import { Dashboard, Exams, Profile } from '@/pages/dashboard';
+import { ExamInstruction, Question, Result } from '@/pages/exam';
+import { CreateExamPage } from '@/pages/dashboard/create-exam';
+// Import Admin actions
 
 import {
   loginAction,
@@ -12,16 +14,16 @@ import {
   logoutAction,
   protectedLoader,
   signupAction, // Import signupAction
-} from '@/libs/auth'
+} from '@/libs/auth';
 import {
-  examAction,
-  examLoader,
   examsLoader,
+  examLoader,
+  examAction,
   indexQuestionLoader,
-  questionAction,
   questionLoader,
+  questionAction,
   resultLoader,
-} from '@/libs/exam'
+} from '@/libs/exam';
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +59,10 @@ export const router = createBrowserRouter([
         index: true,
         element: <Exams />,
         loader: examsLoader,
+      },
+      {
+        path: 'create-exam',
+        element: <CreateExamPage />,
       },
       {
         path: 'profile',
@@ -113,6 +119,7 @@ export const router = createBrowserRouter([
     path: 'logout',
     action: logoutAction,
   },
+  { path: '*', element: <Navigate to="/" replace /> }, // Handle 404 routes (optional, adjust as needed)
 ], {
   basename: '/onlineExamPortal',
 })

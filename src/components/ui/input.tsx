@@ -9,14 +9,14 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 
 export const Input = ({ className, id, label, ...rest }: InputProps) => (
   <>
-    <label htmlFor={id} className="pb-2">
+    <label htmlFor={id} className="pb-2 block">
       {label}
     </label>
     <input
       {...rest}
       id={id}
       className={clsx(
-        'rounded px-3 py-2 ring-blue-500 focus:outline-none focus:ring-2 focus-visible:ring-2',
+        'rounded px-3 py-2 ring-blue-400 focus:outline-none focus:ring-2 focus-visible:ring-2 block w-full border border-gray-300',
         className,
       )}
     />

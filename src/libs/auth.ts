@@ -79,10 +79,26 @@ export const protectedLoader = () => {
   if (!authProvider.isAuthenticated) {
     return redirect('/login')
   }
-  return { username: authProvider.username }
+  // Return username, isAdmin status, fullName, and email
+  return {
+    username: authProvider.username,
+    isAdmin: authProvider.isAdmin,
+    fullName: 'John Doe', // Hardcoded full name
+    email: 'john.doe@example.com', // Hardcoded email
+  }
 }
 
 export const logoutAction = async () => {
   await authProvider.signout()
   return redirect('/')
+}
+
+// Loader to protect admin routes
+export const adminLoader = () => {
+  if (!authProvider.isAuthenticated || !authProvider.isAdmin) {
+    // Redirect non-admins or unauthenticated users
+    return redirect('/dashboard') // Or perhaps to '/' or '/login' depending on desired UX
+  }
+  // Return necessary data for admin pages if needed
+  return { username: authProvider.username, isAdmin: authProvider.isAdmin }
 }

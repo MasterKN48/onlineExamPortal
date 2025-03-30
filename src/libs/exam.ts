@@ -1,8 +1,9 @@
 import { LoaderFunctionArgs, redirect } from 'react-router-dom'
 import { examProvider } from '@/providers/exam'
+import { authProvider } from '@/providers/auth'
 
 export const examsLoader = () => {
-  return { exams: examProvider.getExams() }
+  return { exams: examProvider.getExams(), isAdmin: authProvider.isAdmin }
 }
 
 export const examLoader = ({ params }: LoaderFunctionArgs) => {
